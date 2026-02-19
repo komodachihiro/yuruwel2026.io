@@ -172,10 +172,25 @@ header {
 /* ロゴ画像をメインビジュアルの上に重ねる */
 .top-logo {
   position: absolute;
-  top: 40px;                   /* 画像の中での縦位置 */
+  top: 200px;                   /* 画像の中での縦位置 */
   left: 60px;                  /* 画像の中での横位置 */
   margin: 0;
+  
+  filter:
+  drop-shadow(0 0 6px rgba(255, 255, 255, 1))
+  drop-shadow(0 0 14px rgba(233, 233, 233, 1));
+
 }
+
+.top-logo::before {
+  content: "";
+  position: absolute;
+  inset: -25px;
+  background: radial-gradient(circle, rgba(255,255,255,0.7), transparent 70%);
+  filter: blur(20px);
+  z-index: -1;
+}
+
 
 .top-logo img {
   height: 110px;  /* トップロゴサイズ変更 */
@@ -224,7 +239,6 @@ header {
 /* =========================
    scroll-text アニメーション
 ========================= */
-
 @keyframes scrollTextMove {
   0%   { transform: translateY(0); }
   50%  { transform: translateY(-8px); }
@@ -238,12 +252,8 @@ header {
   color: #222222;
   margin-right: 24px;
   margin-bottom: -100px;
-
-  /* 追加：上下アニメーション */
   animation: scrollTextMove 1.8s ease-in-out infinite;
 }
-
-
 
 .scroll-line {
   width: 1px;
@@ -260,23 +270,29 @@ header {
 }
 
 
+/* 固定ボタン（画面下に追従） */
 
 /* 固定ボタン（画面下に追従） */
-.top_button {
+.top_button{
   position: fixed;
-  bottom: 30px;         /* 画面下からの余白 */
   left: 50%;
-  transform: translateX(-50%);
-  z-index: 999;         /* 最前面に表示 */
-  margin: 0;            /* 上余白無効 */
-  width: 100%;          /* スマホ対策 */
-  display: flex;
-  justify-content: center;
-  pointer-events: none; /* 親要素は無効化 → 子要素だけクリック可能に */
-}
+  bottom: 30px;
+  z-index: 9999;
 
-.contact-button {
-  pointer-events: auto; /* ボタンだけクリック可能に */
+  pointer-events: none;
+
+  opacity: 0;
+  transition: opacity .6s ease;
+
+  /* JSがここだけ変える（Y方向） */
+  --y: 0px;
+  transform: translate(-50%, var(--y));
+  will-change: transform;
+}
+.top_button.active{ opacity: 1; }
+
+.contact-button{
+  pointer-events: auto;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -289,43 +305,6 @@ header {
   box-shadow: 0 6px 16px rgba(255,127,90,0.4);
 }
 
-.contact-button:hover {
-  opacity: 0.9;
-}
-
-.arrow-icon {
-margin-top: 10px;
-}
-
-/* フッター侵入時にフェードアウト */
-.top_button.hidden {
-  opacity: 0;
-  pointer-events: none;  /* 押せなくする */
-  transition: opacity 0.4s ease;
-}
-
-/* 通常時（フェードイン） */
-.top_button {
-  opacity: 1;
-  transition: opacity 0.4s ease;
-}
-
-/* 初期状態：非表示 */
-.top_button {
-  opacity: 0;
-  transition: opacity 0.6s ease; /* フェードインの滑らかさ */
-}
-
-/* 表示状態（JSで付与するクラス） */
-.top_button.active {
-  opacity: 1;
-}
-
-/* すでにある hidden（フッターで隠す）はそのまま利用OK */
-.top_button.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
 /* ========================
    コンセプト
 ======================== */
@@ -464,8 +443,10 @@ margin-top: 10px;
 #goods {
   width: 100%;
   background-color: #fff;  /* ここで画面横いっぱいを白に */
-  padding: 60px 0 70px;    /* 上下だけ余白。左右は0 */
+  padding: 60px 0 140px;    /* 上下だけ余白。左右は0 */
+  position: relative;
 }
+
 
 
 /* 見出し */
@@ -482,7 +463,7 @@ margin-top: 10px;
 
 .goodstitle h3 {
   display: inline-block;
-  padding: 3px 60px;
+  padding: 3px 50px;
   border-radius: 4px;
   border: 1px solid #333;
   font-size: 0.9rem;
@@ -503,14 +484,13 @@ margin-top: 10px;
 .goodsbox_01_text_02{
   color: #2b2b2b;
   font-size: 19px;
-  margin-bottom: 0px;
   font-weight: 400;
 }
 
 .goodspoint_img{
   width: 190px;
   height: auto;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .goods_point_container{
@@ -518,7 +498,7 @@ margin-top: 10px;
   justify-content: center;   /* 横中央 */
   align-items: flex-start;
   gap: 100px;                 /* アイコン間の余白 */
-  margin: 40px auto;
+  margin: 100px auto;
   max-width: 1100px;         /* PC幅制御 */
 }
 
@@ -720,15 +700,15 @@ margin-top: 10px;
 /* 左下の丸ボタン */
 .size-circle-btn{
   position: absolute;
-  left: -18px;      /* カード外に少し出すならマイナス */
+  right: 200px;     /* カード外に少し出すならマイナス */
   bottom: -18px;
 
-  width: 140px;
-  height: 140px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
 
-  background: #fff;
-  border: 2px solid #222;
+  background: #ffee97;
+  border: 1px solid #222;
   box-shadow: 0 8px 18px rgba(0,0,0,.08);
 
   display: grid;
@@ -742,22 +722,92 @@ margin-top: 10px;
 
 .size-circle-btn span{
   font-family: "Noto Sans JP", sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 1.15;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.4;
   text-align: center;
-  letter-spacing: .03em;
+  letter-spacing: .04em;
 }
 
 .size-circle-btn:hover{
-  transform: translateY(-2px);
+  transform: translateY(-6px);
   box-shadow: 0 10px 22px rgba(0,0,0,.12);
+  background: #684ce5;
+  border: 2px solid #222;
+  color: #FFF;
+
 }
 
 .size-circle-btn:active{
   transform: translateY(0);
 }
 
+/* モーダル全体 */
+.size-modal{
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 99999;
+}
+.size-modal.active{
+  display: block;
+}
+
+/* 背景（黒すぎを弱める） */
+.size-modal-overlay{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+}
+
+/* 中身：ここをスクロール領域にする */
+.size-modal-content{
+  position: relative;
+  z-index: 1;
+
+  /* 画面いっぱい */
+  width: 100vw;
+  height: 100vh;
+
+  /* ここが重要：モーダル内スクロール */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  /* 画像が見やすい背景 */
+  background: #fff;
+
+  /* 余白（画像を少し大きく見せる） */
+  padding: 16px 12px;
+}
+
+/* 画像：縦長は“原寸寄り＋拡大”で見せる */
+.size-modal-content img{
+  width: 100%;
+  height: auto;
+  display: block;
+
+  /* 画像を大きく見せたい場合（好みで調整） */
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+/* 閉じるボタン：常に右上に固定 */
+.size-modal-close{
+  position: fixed;  /* ← content内ではなく画面固定 */
+  top:  60px;
+  right: 60px;
+  z-index: 2;
+
+  width: 50px;
+  height: 50px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(213, 161, 47, 0.95);
+  color: #FFF;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,0,0,.25);
+}
 
 /* ========================
    アコーディオン
@@ -805,9 +855,9 @@ margin-top: 10px;
 .accordion-icon{
   width: 0;
   height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 10px solid #222;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 12px solid #4e4e4e;
   transition: transform .25s ease;
 }
 
@@ -838,6 +888,7 @@ h4{
   font-size: 30px;
   padding-bottom: -30px;
 }
+
 
 /* ========================
    フッター

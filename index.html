@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html lang="ja">
       <head>
-         <meta charset="UTF-8">
-         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <title>YURUWELLゆるウェル</title>
-         <!--↓CSSリンク-->
-         <link rel="stylesheet" href="style.css">
-         <!--↓フォントNotoSansJP-->
-	     <link rel="preconnect" href="https://fonts.googleapis.com">
-         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-         <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
-         <!--↓フォントZen Kurenaido-->
-         <link rel="preconnect" href="https://fonts.googleapis.com">
-         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-         <link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Noto+Sans+JP:wght@100..900&family=Zen+Kurenaido&display=swap" rel="stylesheet">
-         <!--↓フォントM PLUS 1p-->
-         <link rel="preconnect" href="https://fonts.googleapis.com">
-         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-         <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=M+PLUS+1p&family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>YURUWELLゆるウェル</title>
+              <!--↓CSSリンク-->
+              <link rel="stylesheet" href="style.css">
+              <!--↓フォントNotoSansJP-->
+	          <link rel="preconnect" href="https://fonts.googleapis.com">
+              <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+              <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+              <!--↓フォントZen Kurenaido-->
+              <link rel="preconnect" href="https://fonts.googleapis.com">
+              <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+              <link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Noto+Sans+JP:wght@100..900&family=Zen+Kurenaido&display=swap" rel="stylesheet">
+              <!--↓フォントM PLUS 1p-->
+              <link rel="preconnect" href="https://fonts.googleapis.com">
+              <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+              <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=M+PLUS+1p&family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+              <!-- Google tag (gtag.js) -->
+             <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+             <script>
+               window.dataLayer = window.dataLayer || [];
+               function gtag(){dataLayer.push(arguments);}
+               gtag('js', new Date());
+
+               // 初期設定（ページビュー）
+               gtag('config', 'G-XXXXXXXXXX', {
+                 send_page_view: true
+               });
+        </script>
+
         </head>
 
       <body>
@@ -90,7 +103,7 @@
               
                  <!--固定ボタン(お申し込みはこちら→)-->
                  <div class="top_button">
-                   <a href="https://docs.google.com/forms/d/e/1FAIpQLSeTr4vmDDoIFmglBbTO5a4C8mPe7NZmAfYSfqjsu2Wp4EeI-Q/viewform" class="contact-button" target="_blank" rel="noopener noreferrer">
+                   <a href="https://forms.gle/4m7yCXvgKakn8WTu5" class="contact-button" target="_blank" rel="noopener noreferrer">
                      商品のご注文はこちら
                      <span class="arrow-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -193,10 +206,25 @@
           </div>
         </div>
     
-        <!-- ✅ここに置く -->
+        <!-- サイズ確認ぼたん -->
         <a class="size-circle-btn" href="#size" aria-label="詳しいサイズを見る">
           <span>詳しい<br>サイズを<br>見る→</span>
         </a>
+
+        <div id="sizeModal" class="size-modal">
+          <div class="size-modal-overlay"></div>
+        
+          <div class="size-modal-content">
+            <button class="size-modal-close" aria-label="閉じる">×</button>
+        
+            <picture>
+              <!-- SP用 -->
+              <source srcset="img/mobile_size.png" media="(max-width: 768px)">
+              <!-- PC用 -->
+              <img src="img/pc_size.png" alt="サイズ表">
+            </picture>
+          </div>
+        </div>
     
         <button class="mid-arrow mid-prev" type="button" aria-label="前へ"></button>
         <button class="mid-arrow mid-next" type="button" aria-label="次へ"></button>
@@ -241,6 +269,8 @@
           </div>
         </div>
       </div>
+
+      <div id="goods-stop"></div>
     
     </div>
     
@@ -265,276 +295,343 @@
             <div class="footer_logo"><img src="img/yuruwell_logo.png" alt=""></div>
 
        </footer>
-
+       
 
        <script>
-        document.addEventListener("DOMContentLoaded", () => {
-          /* =========================
-           * 1) 固定ボタン：2秒後に表示
-           * ========================= */
-          const button = document.querySelector(".top_button");
-          if (button) {
-            setTimeout(() => button.classList.add("active"), 2000);
-          }
-
-          
+        (() => {
+          "use strict";
         
-          /* =========================
-           * 2) フッター表示中は固定ボタンを隠す
-           * ========================= */
-          const footer = document.querySelector("#footer");
-          if (footer && button) {
-            const observer = new IntersectionObserver(
-              (entries) => {
-                entries.forEach(entry => {
-                  if (entry.isIntersecting) button.classList.add("hidden");
-                  else button.classList.remove("hidden");
+          document.addEventListener("DOMContentLoaded", () => {
+        
+            /* =========================================================
+              0) ユーティリティ
+            ========================================================= */
+            const $  = (s, r=document) => r.querySelector(s);
+            const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+        
+            const isSPMedia = window.matchMedia("(max-width: 428px)");
+            const getIsSP = () => isSPMedia.matches;
+        
+            const rafThrottle = (fn) => {
+              let ticking = false;
+              return (...args) => {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(() => {
+                  ticking = false;
+                  fn(...args);
                 });
-              },
-              { threshold: 0.1 }
-            );
-            observer.observe(footer);
-          }
+              };
+            };
         
-          /* =========================
-           * 3) Goods：3枚表示（左・中央・右）を矢印で切替
-           * ========================= */
-           const goodsImages = [
-  { src: "img/goods_01.png", alt: "リカバリウェアー長袖" },
-  { src: "img/goods_02.png", alt: "リカバリウェアー半袖" },
-  { src: "img/goods_03.png", alt: "リカバリウェアー長ズボン" },
-  { src: "img/goods_04.png", alt: "リカバリリストバンド" },
-  { src: "img/goods_05.png", alt: "インソールブリッツジュニア" },
-  { src: "img/goods_06.png", alt: "インソールスーパーブリッツ" },
-  { src: "img/goods_07.png", alt: "インソールブリッツ" },
-
-];
-
-const isSP = window.matchMedia("(max-width: 428px)").matches;
-
-const track  = document.querySelector(".goods-track");
-const prevBtn = document.querySelector(".mid-prev");
-const nextBtn = document.querySelector(".mid-next");
-
-const leftImg   = document.getElementById("goods-left");
-const centerImg = document.getElementById("goods-center");
-const rightImg  = document.getElementById("goods-right");
-
-if (track) {
-  if (isSP) {
-    // SP：6枚全部並べる（横スクロール）
-    track.innerHTML = goodsImages
-      .map(item => `
-        <div class="goods-item">
-          <img src="${item.src}" alt="${item.alt}">
-        </div>
-      `)
-      .join("");
-
-    // 矢印は不要
-    if (prevBtn) prevBtn.style.display = "none";
-    if (nextBtn) nextBtn.style.display = "none";
-  } else {
-    // PC：今まで通り3枚を差し替え
-    if (leftImg && centerImg && rightImg && prevBtn && nextBtn) {
-      let centerIndex = 1;
-
-      const render = () => {
-        const len = goodsImages.length;
-        const leftIndex  = (centerIndex - 1 + len) % len;
-        const rightIndex = (centerIndex + 1) % len;
-
-        leftImg.src = goodsImages[leftIndex].src;
-        leftImg.alt = goodsImages[leftIndex].alt;
-
-        centerImg.src = goodsImages[centerIndex].src;
-        centerImg.alt = goodsImages[centerIndex].alt;
-
-        rightImg.src = goodsImages[rightIndex].src;
-        rightImg.alt = goodsImages[rightIndex].alt;
-      };
-
-      prevBtn.addEventListener("click", () => {
-        centerIndex = (centerIndex - 1 + goodsImages.length) % goodsImages.length;
-        render();
-      });
-
-      nextBtn.addEventListener("click", () => {
-        centerIndex = (centerIndex + 1) % goodsImages.length;
-        render();
-      });
-
-      render();
-    }
-  }
-  
-}
+            /* =========================================================
+              1) 固定ボタン：2秒後に表示 + GOODS最下部でストップ
+              - CSSは「--y」方式（transform全文はJSで触らない）
+            ========================================================= */
+            const btn   = $(".top_button");
+            const goods = $("#goods");
         
-          /* =========================
-           * 4) ふわっと表示（.js-fadein）
-           * ========================= */
-          const fadeTargets = document.querySelectorAll(".js-fadein");
-          if (fadeTargets.length) {
-            const fadeObserver = new IntersectionObserver((entries, obs) => {
-              entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                  entry.target.classList.add("is-visible");
-                  obs.unobserve(entry.target);
+            if (btn) {
+              setTimeout(() => btn.classList.add("active"), 2000);
+            }
+        
+            if (btn && goods) {
+              const margin = -40; // CSS bottom と合わせる
+              const updateStop = () => {
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        
+                // goods 下端（ページ絶対座標）
+                const goodsBottomAbs =
+                  goods.getBoundingClientRect().top + scrollY + goods.offsetHeight;
+        
+                // 画面下端（ページ絶対座標）
+                const viewportBottomAbs = scrollY + window.innerHeight;
+        
+                // 下端を越えたら、その分だけ上へ（＝見た目は停止）
+                const overlap = (viewportBottomAbs - margin) - goodsBottomAbs;
+                const y = overlap > 0 ? -overlap : 0;
+        
+                btn.style.setProperty("--y", `${y}px`);
+              };
+        
+              const onScroll = rafThrottle(updateStop);
+              updateStop();
+              window.addEventListener("scroll", onScroll, { passive: true });
+              window.addEventListener("resize", updateStop);
+            }
+        
+            /* =========================================================
+              2) GOODS：PC=3枚差し替え + SP=横スクロール全枚
+              - SP/PC切替（リサイズ）にも耐える
+            ========================================================= */
+            const goodsImages = [
+              { src: "img/goods_01.png", alt: "リカバリウェアー長袖" },
+              { src: "img/goods_02.png", alt: "リカバリウェアー半袖" },
+              { src: "img/goods_03.png", alt: "リカバリウェアー長ズボン" },
+              { src: "img/goods_04.png", alt: "リカバリリストバンド" },
+              { src: "img/goods_05.png", alt: "インソールブリッツジュニア" },
+              { src: "img/goods_06.png", alt: "インソールスーパーブリッツ" },
+              { src: "img/goods_07.png", alt: "インソールブリッツ" },
+            ];
+        
+            const track  = $(".goods-track");
+            const prevBtn = $(".mid-prev");
+            const nextBtn = $(".mid-next");
+            const leftImg   = $("#goods-left");
+            const centerImg = $("#goods-center");
+            const rightImg  = $("#goods-right");
+        
+            let centerIndex = 1;     // PC用
+            let currentMode = null;  // "sp" | "pc"
+        
+            const renderGoods = () => {
+              if (!track) return;
+        
+              const mode = getIsSP() ? "sp" : "pc";
+              if (mode === currentMode) return; // 変化がないなら何もしない
+              currentMode = mode;
+        
+              // 既存クリックを安全に（ボタンを複製してイベントリセット）
+              const resetBtn = (btnEl) => {
+                if (!btnEl || !btnEl.parentNode) return btnEl;
+                const clone = btnEl.cloneNode(true);
+                btnEl.parentNode.replaceChild(clone, btnEl);
+                return clone;
+              };
+              let pBtn = resetBtn(prevBtn);
+              let nBtn = resetBtn(nextBtn);
+        
+              if (mode === "sp") {
+                // SP：全部並べる
+                track.innerHTML = goodsImages.map(item => `
+                  <div class="goods-item">
+                    <img src="${item.src}" alt="${item.alt}">
+                  </div>
+                `).join("");
+        
+                if (pBtn) pBtn.style.display = "none";
+                if (nBtn) nBtn.style.display = "none";
+              } else {
+                // PC：3枚DOMが前提（id goods-left/center/right を使う）
+                // track をPCの元構造に戻せない場合があるので、安全策：
+                // 3枚が無いなら何もしない
+                if (!leftImg || !centerImg || !rightImg) return;
+        
+                // 矢印復帰
+                if (pBtn) pBtn.style.display = "";
+                if (nBtn) nBtn.style.display = "";
+        
+                const render3 = () => {
+                  const len = goodsImages.length;
+                  const leftIndex  = (centerIndex - 1 + len) % len;
+                  const rightIndex = (centerIndex + 1) % len;
+        
+                  leftImg.src = goodsImages[leftIndex].src;
+                  leftImg.alt = goodsImages[leftIndex].alt;
+        
+                  centerImg.src = goodsImages[centerIndex].src;
+                  centerImg.alt = goodsImages[centerIndex].alt;
+        
+                  rightImg.src = goodsImages[rightIndex].src;
+                  rightImg.alt = goodsImages[rightIndex].alt;
+                };
+        
+                if (pBtn) {
+                  pBtn.addEventListener("click", () => {
+                    centerIndex = (centerIndex - 1 + goodsImages.length) % goodsImages.length;
+                    render3();
+                  });
                 }
+                if (nBtn) {
+                  nBtn.addEventListener("click", () => {
+                    centerIndex = (centerIndex + 1) % goodsImages.length;
+                    render3();
+                  });
+                }
+        
+                render3();
+              }
+            };
+        
+            renderGoods();
+            // SP/PC切替に追従
+            if (typeof isSPMedia.addEventListener === "function") {
+              isSPMedia.addEventListener("change", renderGoods);
+            } else {
+              // Safari古め対策
+              isSPMedia.addListener(renderGoods);
+            }
+            window.addEventListener("resize", rafThrottle(renderGoods));
+        
+            /* =========================================================
+              3) ふわっと表示（.js-fadein）
+              - 1回だけ監視、表示したら解除
+            ========================================================= */
+            const fadeTargets = $$(".js-fadein");
+            if (fadeTargets.length) {
+              const fadeObserver = new IntersectionObserver((entries, obs) => {
+                for (const entry of entries) {
+                  if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    obs.unobserve(entry.target);
+                  }
+                }
+              }, { threshold: 0.18 });
+        
+              fadeTargets.forEach(el => fadeObserver.observe(el));
+            }
+        
+            /* =========================================================
+              4) topロゴ/トップ画像（fade-in）
+            ========================================================= */
+            const logo = $(".top-logo");
+            const topTitle = $(".toptitle");
+            if (logo || topTitle) {
+              const io = new IntersectionObserver((entries) => {
+                for (const entry of entries) {
+                  if (entry.isIntersecting) entry.target.classList.add("fade-in");
+                }
+              }, { threshold: 0.2 });
+        
+              if (logo) io.observe(logo);
+              if (topTitle) io.observe(topTitle);
+            }
+        
+            /* =========================================================
+              5) GOODS見出し/ポイント：出現
+              - #goods .goodsbox_01 / #goods .goods_point に is-visible を付与
+            ========================================================= */
+            const goodsRevealTargets = [
+              $("#goods .goodsbox_01"),
+              ...$$('#goods .goods_point')
+            ].filter(Boolean);
+        
+            if (goodsRevealTargets.length) {
+              const io = new IntersectionObserver((entries, obs) => {
+                for (const entry of entries) {
+                  if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    obs.unobserve(entry.target);
+                  }
+                }
+              }, { threshold: 0.18 });
+        
+              goodsRevealTargets.forEach(el => io.observe(el));
+            }
+        
+            /* =========================================================
+              6) SP：ハンバーガーメニュー
+            ========================================================= */
+            const hamburger = $(".hamburger");
+            const spNav = $("#headernav");
+        
+            if (hamburger && spNav) {
+              const closeMenu = () => {
+                document.body.classList.remove("menu-open");
+                hamburger.setAttribute("aria-expanded", "false");
+                hamburger.setAttribute("aria-label", "メニューを開く");
+              };
+              const openMenu = () => {
+                document.body.classList.add("menu-open");
+                hamburger.setAttribute("aria-expanded", "true");
+                hamburger.setAttribute("aria-label", "メニューを閉じる");
+              };
+        
+              hamburger.addEventListener("click", () => {
+                const isOpen = document.body.classList.contains("menu-open");
+                isOpen ? closeMenu() : openMenu();
               });
-            }, { threshold: 0.2 });
         
-            fadeTargets.forEach(el => fadeObserver.observe(el));
-          }
+              // メニュー内リンク押下で閉じる
+              $$('a[href^="#"]', spNav).forEach(a => a.addEventListener("click", closeMenu));
         
-          /* =========================
-           * 5) topロゴ/トップ画像のfade-in（どちらも同じクラス付与で統一）
-           * ========================= */
-          const logo = document.querySelector(".top-logo");
-          const topTitle = document.querySelector(".toptitle");
+              // 外側クリックで閉じる
+              document.addEventListener("click", (e) => {
+                if (!document.body.classList.contains("menu-open")) return;
+                if (spNav.contains(e.target) || hamburger.contains(e.target)) return;
+                closeMenu();
+              });
         
-          const fadeInObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) entry.target.classList.add("fade-in");
-            });
-          }, { threshold: 0.2 });
+              // ESCで閉じる
+              document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") closeMenu();
+              });
+            }
+
+            /* =========================================================
+              7) アコーディオン（#goods-accordion）
+              - 1つだけ開く / 再クリックで閉じる
+            ========================================================= */
+           const sizeBtn = document.querySelector('.size-circle-btn');
+           const sizeModal = document.getElementById('sizeModal');
+           const sizeClose = document.querySelector('.size-modal-close');
+           const sizeOverlay = document.querySelector('.size-modal-overlay');
+
+           sizeBtn.addEventListener('click', function(e){
+            e.preventDefault();
+           sizeModal.classList.add('active');
+           document.body.style.overflow = 'hidden'; // 背景スクロール停止
+           });
+
+           function closeModal(){
+           sizeModal.classList.remove('active');
+           document.body.style.overflow = '';
+           }
+
+           sizeClose.addEventListener('click', closeModal);
+           sizeOverlay.addEventListener('click', closeModal);
         
-          if (logo) fadeInObserver.observe(logo);
-          if (topTitle) fadeInObserver.observe(topTitle);
-        });
-
-        /* =========================
- * 6) SP：ハンバーガーメニュー
- * ========================= */
-const hamburger = document.querySelector(".hamburger");
-const spNav = document.querySelector("#headernav");
-
-if (hamburger && spNav) {
-  const closeMenu = () => {
-    document.body.classList.remove("menu-open");
-    hamburger.setAttribute("aria-expanded", "false");
-    hamburger.setAttribute("aria-label", "メニューを開く");
-  };
-
-  const openMenu = () => {
-    document.body.classList.add("menu-open");
-    hamburger.setAttribute("aria-expanded", "true");
-    hamburger.setAttribute("aria-label", "メニューを閉じる");
-  };
-
-  hamburger.addEventListener("click", () => {
-    const isOpen = document.body.classList.contains("menu-open");
-    isOpen ? closeMenu() : openMenu();
-  });
-
-  /* メニュー内リンクを押したら閉じる */
-  spNav.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener("click", closeMenu);
-  });
-
-  /* 外側クリックで閉じる */
-  document.addEventListener("click", (e) => {
-    if (!document.body.classList.contains("menu-open")) return;
-    if (spNav.contains(e.target) || hamburger.contains(e.target)) return;
-    closeMenu();
-  });
-
-  /* ESCで閉じる */
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeMenu();
-  });
-}
-
-  const targets = document.querySelectorAll('.js-fadein');
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('is-visible');
-      }
-    });
-  }, { threshold: 0.15 });
-
-  targets.forEach(t => io.observe(t));
-
+            /* =========================================================
+              7) アコーディオン（#goods-accordion）
+              - 1つだけ開く / 再クリックで閉じる
+            ========================================================= */
+            const accordion = $("#goods-accordion");
+            if (accordion) {
+              const items = $$(".accordion-item", accordion);
+        
+              const closeItem = (item) => {
+                const header  = $(".accordion-header", item);
+                const content = $(".accordion-content", item);
+                item.classList.remove("active");
+                header?.setAttribute("aria-expanded", "false");
+                content?.setAttribute("aria-hidden", "true");
+                if (content) content.style.maxHeight = "0px";
+              };
+        
+              const openItem = (item) => {
+                const header  = $(".accordion-header", item);
+                const content = $(".accordion-content", item);
+                item.classList.add("active");
+                header?.setAttribute("aria-expanded", "true");
+                content?.setAttribute("aria-hidden", "false");
+                if (content) content.style.maxHeight = content.scrollHeight + "px";
+              };
+        
+              items.forEach((item) => {
+                const header  = $(".accordion-header", item);
+                const content = $(".accordion-content", item);
+        
+                if (content) content.style.maxHeight = "0px"; // 初期閉
+        
+                header?.addEventListener("click", () => {
+                  const isOpen = item.classList.contains("active");
+                  items.forEach(closeItem);
+                  if (!isOpen) openItem(item);
+                });
+              });
+        
+              window.addEventListener("resize", rafThrottle(() => {
+                const opened = items.find(i => i.classList.contains("active"));
+                if (!opened) return;
+                const content = $(".accordion-content", opened);
+                if (content) content.style.maxHeight = content.scrollHeight + "px";
+              }));
+            }
+        
+          });
+        })();
         </script>
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const accordion = document.getElementById("goods-accordion");
-    if (!accordion) return;
-  
-    const items = Array.from(accordion.querySelectorAll(".accordion-item"));
-  
-    const closeItem = (item) => {
-      const header = item.querySelector(".accordion-header");
-      const content = item.querySelector(".accordion-content");
-      item.classList.remove("active");
-      header?.setAttribute("aria-expanded", "false");
-      content?.setAttribute("aria-hidden", "true");
-      if (content) content.style.maxHeight = "0px";
-    };
-  
-    const openItem = (item) => {
-      const header = item.querySelector(".accordion-header");
-      const content = item.querySelector(".accordion-content");
-      item.classList.add("active");
-      header?.setAttribute("aria-expanded", "true");
-      content?.setAttribute("aria-hidden", "false");
-      if (content) content.style.maxHeight = content.scrollHeight + "px";
-    };
-  
-    items.forEach((item) => {
-      const header = item.querySelector(".accordion-header");
-      const content = item.querySelector(".accordion-content");
-  
-      // 初期状態は閉じ
-      if (content) content.style.maxHeight = "0px";
-  
-      header?.addEventListener("click", () => {
-        const isOpen = item.classList.contains("active");
-  
-        // まず全部閉じる
-        items.forEach(closeItem);
-  
-        // クリックしたものが閉じていたなら開く（開いてたなら閉じたまま）
-        if (!isOpen) openItem(item);
-      });
-    });
-  
-    // 画面リサイズで開いてるやつの高さを再計算（PC/SP切替でも崩れにくい）
-    window.addEventListener("resize", () => {
-      const opened = items.find(i => i.classList.contains("active"));
-      if (!opened) return;
-      const content = opened.querySelector(".accordion-content");
-      if (content) content.style.maxHeight = content.scrollHeight + "px";
-    });
-  });
-  </script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const targets = [
-      document.querySelector("#goods .goodsbox_01"),
-      ...document.querySelectorAll("#goods .goods_point")
-    ].filter(Boolean);
-  
-    if (!targets.length) return;
-  
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.18 });
-  
-    targets.forEach(el => io.observe(el));
-  });
-  </script>
-  
+        
 
 </body>
 </html>
