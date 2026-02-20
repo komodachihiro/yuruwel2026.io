@@ -1186,7 +1186,7 @@ h4{
   }
 
   .top_button{
-    width: 100%;
+    width: 80%;
     padding: 0 16px;
     bottom: 20px;
   }
@@ -1197,7 +1197,7 @@ h4{
     text-align: center;
 
     padding: 16px 20px;   /* ← 適切な余白 */
-    font-size: 1rem;
+    font-size: 1.2rem;
     line-height: 1.2;
 
     border-radius: 999px;
@@ -1317,7 +1317,7 @@ h4{
     display: flex;
     flex-direction: column;
     align-items: center;   /* ← 中央寄せ */
-    gap: 14px;
+    gap: 20px;
   }
 
   .goods_point{
@@ -1335,7 +1335,7 @@ h4{
   .goodspoint_img{
     display: block;
     margin: 0 auto;
-    max-width: 130px;   /* 必要なら調整 */
+    max-width: 140px;   /* 必要なら調整 */
     height: auto;
   }
 
@@ -1348,9 +1348,7 @@ h4{
 
   /* グッズポイントアニメーション */
 
-  .goods_point_container{
-    padding-bottom: -40px;
-  }
+  
 
   .goods_point{
     opacity: 0;
@@ -1378,7 +1376,13 @@ h4{
 #goods .goods_point:nth-child(3){ transition-delay: .5s; }
 
 
+  /* 商品紹介カードの上下余白 */
 
+
+/* カード間の余白をコントロール */
+.goods_point_container{
+  margin-bottom: 20px;
+}
 
 
   /* 商品紹介カードスライド */
@@ -1448,7 +1452,7 @@ h4{
   height: auto;
   border-radius: 999px;
 
-  margin: 24px auto 0;
+  margin: 12px auto 0;
   padding: 16px 20px;
 
   background: #ffee97;
@@ -1470,11 +1474,72 @@ h4{
   display: none;
 }
 
+
+
+/* ========================
+   アコーディオン
+======================== */
+
+.accordion{
+  max-width: 100%;
+  margin: 20px auto;
+  padding: 0 50px;
+  box-sizing: border-box;
+  margin-bottom: 80px;
+}
+
+.accordion-title{
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+}
+
+/* 三角 */
+.accordion-icon{
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 12px solid #4e4e4e;
+  transition: transform .25s ease;
+}
+
+.accordion-item.active .accordion-icon{
+  transform: rotate(180deg);
+}
+
+/* 中身：フェード＋スライド */
+.accordion-content{
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: max-height .38s ease, opacity .28s ease, transform .28s ease;
+}
+
+.accordion-inner{
+  padding: 1px 0 2px;
+}
+
+.accordion-item.active .accordion-content{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+h4{
+  color: #b7a13a;
+  font-size: 20px;
+  padding-bottom: -30px;
+}
+
+
+
 /* ========================
    FOOTER（スマホ）
 ======================== */
 #footer{ 
   padding: 0px 16px 20px; 
+  margin-top: -30px;
 }
 
 .footer_container01{
