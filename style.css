@@ -1492,6 +1492,7 @@ h4{
   overflow-x: hidden;       /* ← 横は絶対はみ出させない */
   box-sizing: border-box;
 }
+
 /* 画像：縦長は“原寸寄り＋拡大”で見せる */
 .size-modal-content img{
   width: 100%;
