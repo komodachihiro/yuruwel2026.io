@@ -1347,10 +1347,7 @@ h4{
   }
 
   /* グッズポイントアニメーション */
-
-  
-
-  .goods_point{
+   .goods_point{
     opacity: 0;
     transform: translateY(14px);
     transition: opacity .5s ease, transform .6s ease;
@@ -1377,8 +1374,6 @@ h4{
 
 
   /* 商品紹介カードの上下余白 */
-
-
 /* カード間の余白をコントロール */
 .goods_point_container{
   margin-bottom: 20px;
@@ -1474,6 +1469,56 @@ h4{
   display: none;
 }
 
+
+/* モーダル全体 */
+.size-modal{
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 99999;
+}
+.size-modal.active{
+  display: block;
+}
+
+
+/* 中身：ここをスクロール領域にする */
+.size-modal-content{
+  width: 100%;              /* ← 100vw をやめる */
+  height: 100vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  overflow-x: hidden;       /* ← 横は絶対はみ出させない */
+  box-sizing: border-box;
+}
+/* 画像：縦長は“原寸寄り＋拡大”で見せる */
+.size-modal-content img{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+}
+
+/* 閉じるボタン：常に右上に固定 */
+.size-modal-close{
+  position: fixed;  /* ← content内ではなく画面固定 */
+  top:  20px;
+  right: 20px;
+  z-index: 2;
+
+  width: 50px;
+  height: 50px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(213, 161, 47, 0.95);
+  color: #FFF;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,0,0,.25);
+}
 
 
 /* ========================
