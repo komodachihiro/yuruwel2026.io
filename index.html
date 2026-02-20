@@ -633,5 +633,26 @@
         </script>
         
 
+        <script>
+          document.addEventListener('DOMContentLoaded', () => {
+            const items = document.querySelectorAll('.goods_point');
+          
+            const io = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if(entry.isIntersecting){
+                  entry.target.classList.add('is-in');
+                  io.unobserve(entry.target);
+                }
+              });
+            }, { threshold: 0.15 });
+          
+            items.forEach((el, i) => {
+              el.style.transitionDelay = (i * 90) + 'ms'; // ちょいズラし
+              io.observe(el);
+            });
+          });
+          </script>
+          
+
 </body>
 </html>

@@ -271,8 +271,6 @@ header {
 
 
 /* 固定ボタン（画面下に追従） */
-
-/* 固定ボタン（画面下に追従） */
 .top_button{
   position: fixed;
   left: 50%;
@@ -284,7 +282,6 @@ header {
   opacity: 0;
   transition: opacity .6s ease;
 
-  /* JSがここだけ変える（Y方向） */
   --y: 0px;
   transform: translate(-50%, var(--y));
   will-change: transform;
@@ -295,16 +292,28 @@ header {
   pointer-events: auto;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 14px 200px;
+  justify-content: center;
+  gap: 10px;
+
+  /* ★崩れの原因：固定の横paddingをやめる */
+  padding: 20px 28px;
+
+  /* ★幅を画面に追従させつつ、PCでは程よい最大幅に */
+  width: min(720px, 92vw);
+
   border-radius: 999px;
   background: #ff7f5a;
   color: #fff;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  line-height: 1.1;
+
+  /* ★縮小しても縦積みしない */
+  white-space: nowrap;
+
+  box-sizing: border-box;
   box-shadow: 0 6px 16px rgba(255,127,90,0.4);
 }
-
 /* ========================
    コンセプト
 ======================== */
@@ -1120,32 +1129,45 @@ h4{
     align-items: center;
     padding: 0 !important;
     margin: 0;
+    position: relative;
+    height: 70vh;
+    overflow: hidden;
+
   }
 
   .top-logo{
+    z-index: 3;
     position: static !important;
     order: 1;
-    margin: 0px 0 0px !important;
     text-align: center;
-    transform: none !important;
+    order: initial;       /* flex順の影響を消す */
+    filter: drop-shadow(0 0 4px rgba(255,255,255,0.4));
+    padding-top: 30px;
   }
 
+  .top-logo::before {
+    display: none;
+  }
+
+
   .top-logo img{
-    height: 70px;
+    height: 65px;
     margin: 0 !important;
     display: inline-block;
   }
-
+  
   .top-main{
     order: 2;
-    width: 100vw;
-    height: 70vh;
-    max-height: 560px;
+    width: 100%;
+    height: 100%;                /* ← 親に合わせる */
     object-fit: cover;
+    object-position: 50% 40%;
+    transform: scale(1.5);      /* ← 拡大（1.15〜1.4で調整） */
+    transform-origin: 50% 70%;   /* ← 顔寄りに拡大中心 */
     margin: 0;
-    transform: none;
     border-radius: 0;
     display: block;
+    max-height: none;    
   }
 
   /* スクロール矢印は非表示（1回だけ） */
@@ -1163,13 +1185,25 @@ h4{
     display: none;
   }
 
-  .top_button{ padding: 0 16px; }
+  .top_button{
+    width: 100%;
+    padding: 0 16px;
+    bottom: 20px;
+  }
 
   .contact-button{
-    width: 80%;
+    width: 100%;
     justify-content: center;
-    padding: 14px 14px;
-    font-size: 1.3rem;
+    text-align: center;
+
+    padding: 16px 20px;   /* ← 適切な余白 */
+    font-size: 1rem;
+    line-height: 1.2;
+
+    border-radius: 999px;
+    white-space: nowrap;  /* ← 縦積み防止 */
+
+    box-shadow: 0 8px 20px rgba(255,127,90,0.35);
   }
 
   /* ========================
@@ -1240,7 +1274,7 @@ h4{
   /* ========================
      GOODS（横スクロール化）
   ======================== */
-  #goods{ padding: 5px 0px 48px; }
+  #goods{ padding: 1px 0px 70px; }
 
   .goods-view{ max-width: 100%; }
 
@@ -1252,16 +1286,102 @@ h4{
   line-height: 1.3;
   border: none;      /* ← 線を消す */
   color: #a2a2319b;
-  margin-top: -20px;
+  margin: 0 0 12px;
   }
 
   .goodsbox_01_text{
     color: #000;
-    font-size: 1rem;
-    line-height: 1.2;
-    padding: 0px 40px;
-    margin-bottom: -10px;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    font-weight: 500;
+    padding: 0px 44px;
   }
+
+  .goodsbox_01_text_02{
+    color: #000;
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    padding: 0px 30px;
+  }
+
+  .goodsbox_01{
+    margin-bottom: -70px;
+  }
+
+  /* ========================
+     GOODS ポイント縦並び
+  ======================== */
+  .goods_point_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* ← 中央寄せ */
+    gap: 14px;
+  }
+
+  .goods_point{
+    width: 100%;
+    display: flex;
+    justify-content: center; /* ← 子を中央へ */
+    margin: 0;
+  }
+
+  .goods_point_box{
+    width: min(92vw, 360px);  /* ← スマホでちょうどいい幅 */
+    text-align: center;
+  }
+
+  .goodspoint_img{
+    display: block;
+    margin: 0 auto;
+    max-width: 130px;   /* 必要なら調整 */
+    height: auto;
+  }
+
+  .goods_point_box_text{
+    margin: 8px 0 0;
+    line-height: 1.35;
+    font-size: 1.2rem;
+    color: #c8b451;
+  }
+
+  /* グッズポイントアニメーション */
+
+  .goods_point_container{
+    padding-bottom: -40px;
+  }
+
+  .goods_point{
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .5s ease, transform .6s ease;
+  }
+  
+  .goods_point.is-in{
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* 動きを減らす設定の人にはアニメ無し */
+  @media (prefers-reduced-motion: reduce){
+    .goods_point{
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* 順番に出す（pointの遅延） */
+#goods .goods_point:nth-child(1){ transition-delay: .1s; }
+#goods .goods_point:nth-child(2){ transition-delay: .3s; }
+#goods .goods_point:nth-child(3){ transition-delay: .5s; }
+
+
+
+
+
+  /* 商品紹介カードスライド */
 
   .goods-track{
     gap: 12px;
@@ -1319,141 +1439,38 @@ h4{
   }
 
 
-  
+   /* ========================
+サイズボタン
+======================== */
+.size-circle-btn{
+  position: static;     /* ← absoluteやめる */
+  width: 70%;
+  height: auto;
+  border-radius: 999px;
 
-  /* ========================
-     SHAREWELL
-  ======================== */
-/* SHAREWELL 本体（黄色背景） */
-#sharewell{
-  position: relative;
-  background: linear-gradient(to bottom, #fbf1b8 0%, #f3d676 100%);
-  overflow: hidden;
-  padding: 120px 16px 56px;
-  margin-bottom: -90px;
+  margin: 24px auto 0;
+  padding: 16px 20px;
 
-  /* 1pxだけ上に食い込ませて継ぎ目を消す（超重要） */
-  margin-top: -2px;
-  border-top: 0 !important;
-  box-shadow: none !important;
-  outline: 0 !important;
+  background: #ffee97;
+  border: 1px solid #222;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
 }
 
-/* 上部ウェーブ（波） */
-#sharewell::before{
-  content: "";
-  position: absolute;
-
-  /* ここがポイント：上に 2px かぶせる */
-  top: -2px;
-  left: 0;
-  width: 100%;
-  height: 84px; /* 80pxより少し大きくして隙間を消す */
-
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-position: top center;
-  pointer-events: none;
-  z-index: 1;
-
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23ffffff' d='M0,64 C120,100 240,0 360,32 C480,200 600,80 720,80 C840,80 960,32 1080,32 C1200,32 1320,80 1440,64 L1440,0 L0,0 Z'/%3E%3C/svg%3E");
+.size-circle-btn span{
+  font-size: 16px;
+  line-height: 1.2;
 }
 
-/* 中身を波より前に */
-.sharewell_container{
-  position: relative;
-  z-index: 2;
-}
-/* 上部ウェーブ（これが波の本体） */
-#sharewell::before{
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top center;
-  z-index: 1;
-  pointer-events: none;
-
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23ffffff' d='M0,64 C120,80 240,32 360,32 C480,32 600,80 720,80 C840,80 960,32 1080,32 C1200,32 1320,80 1440,64 L1440,0 L0,0 Z'/%3E%3C/svg%3E");
+.size-circle-btn br{
+  display: none;
 }
 
-/* 中身を波より前に出す */
-.sharewell_container{
-  position: relative;
-  z-index: 2;
-}
-
-
-  .sp-only-title{
-    display: block;
-    text-align: center;
-    line-height: 1;
-    margin-bottom: 20px;
-  }
-
-  .sp-only-title span{
-    display: block;
-    font-size: 3rem;
-    font-weight: 100;
-    letter-spacing: 0.01em;
-    margin-top: 6px;
-  }
-
-  .sharewellbox_01 {
-text-align: center;
-  }
-  .sharewellbox_01 h4  {
-    display: inline-block;
-    padding: 3px 60px;
-    border-radius: 4px;
-    border: 1px solid #333;
-    font-size: 1rem;
-    letter-spacing: 0.04em;
-    margin: 0 0 20px;
-    background: #fff;
-  }
-  
-  
-  
-  .sharewellbox_01_text {
-    font-size: 1.2rem;
-    font-weight: 600;
-    line-height: 1.5;
-    color: #000;
-    margin: 0 0 18px;
-    letter-spacing: 0.1em;
-    margin-top: 10px;
-  text-align: center;
-  padding-bottom: 10px;
-  }
-  
-
-  .sharewellbox_02{
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 14px;
-    position: relative;
-  }
-
-  .sharewellbox_02 img{
-    max-width: 85%;
-    margin: 0 auto;
-    display: block;
-  }
-
-  .sharewellbox_02_point{
-    text-align: right;
-    right: -5px;
-  bottom: 65px; 
-  }
-
- /* ========================
+/* ========================
    FOOTER（スマホ）
 ======================== */
 #footer{ 
@@ -1488,4 +1505,17 @@ text-align: center;
   height: 70px;
   display: block;
 }
+
+ /* PC側の上下アニメを止める（アイコン/ボックス/中身） */
+  .goodspoint_img,
+  .goods_point,
+  .goods_point_box,
+  .goods_point_box_text{
+    animation: none !important;
+  }
+
+  /* transformもPC側が効いている場合があるので一旦リセット */
+  .goodspoint_img{
+    transform: none !important;
+  }
 }
