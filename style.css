@@ -288,6 +288,35 @@ header {
 }
 .top_button.active{ opacity: 1; }
 
+
+.contact-button{
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    filter .18s ease;
+}
+
+.contact-button:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(255,127,90,.45);
+  filter: brightness(1.05);
+}
+
+/* キーボード操作でも分かる */
+.contact-button:focus-visible{
+  outline: none;
+  box-shadow:
+    0 10px 26px rgba(255,127,90,.45),
+    0 0 0 4px rgba(255,127,90,.25);
+}
+
+/* 押した感 */
+.contact-button:active{
+  transform: translateY(-1px) scale(.98);
+  box-shadow: 0 6px 16px rgba(255,127,90,.35);
+}
+
+
 .contact-button{
   pointer-events: auto;
   display: inline-flex;
@@ -1206,6 +1235,8 @@ h4{
     box-shadow: 0 8px 20px rgba(255,127,90,0.35);
   }
 
+  .contact-button:hover{ transform: none; filter: none; }
+  
   /* ========================
      CONCEPT
   ======================== */
